@@ -2,6 +2,7 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { StatsCard } from "@/components/StatsCard";
 import { ProductCard } from "@/components/ProductCard";
 import { DollarSign, ShoppingCart, TrendingUp, Users } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const Index = () => {
   // Mock data - in a real app this would come from an API
@@ -59,6 +60,27 @@ const Index = () => {
     },
   ];
 
+  const recentSales = [
+    {
+      customer: "John Doe",
+      product: "Digital Marketing Guide",
+      amount: "$49.99",
+      date: "2 minutes ago",
+    },
+    {
+      customer: "Jane Smith",
+      product: "UI/UX Templates",
+      amount: "$79.99",
+      date: "5 minutes ago",
+    },
+    {
+      customer: "Bob Johnson",
+      product: "Photography Course",
+      amount: "$129.99",
+      date: "10 minutes ago",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <DashboardHeader />
@@ -69,7 +91,53 @@ const Index = () => {
           ))}
         </div>
         
-        <h2 className="text-2xl font-bold mt-8 mb-4">Your Products</h2>
+        <div className="grid gap-6 mt-8 md:grid-cols-2">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Recent Sales</h2>
+            <div className="rounded-lg border bg-card">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Customer</TableHead>
+                    <TableHead>Product</TableHead>
+                    <TableHead>Amount</TableHead>
+                    <TableHead>Date</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {recentSales.map((sale) => (
+                    <TableRow key={sale.customer}>
+                      <TableCell>{sale.customer}</TableCell>
+                      <TableCell>{sale.product}</TableCell>
+                      <TableCell>{sale.amount}</TableCell>
+                      <TableCell>{sale.date}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Top Products</h2>
+            <div className="grid gap-4">
+              {products.slice(0, 3).map((product) => (
+                <div key={product.title} className="flex items-center gap-4 p-4 rounded-lg border bg-card">
+                  <div className="w-16 h-16 rounded-lg overflow-hidden">
+                    <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold">{product.title}</h3>
+                    <p className="text-sm text-muted-foreground">{product.sales} sales</p>
+                  </div>
+                  <p className="text-lg font-bold">${product.price}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold mt-8 mb-4">All Products</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product.title} {...product} />
