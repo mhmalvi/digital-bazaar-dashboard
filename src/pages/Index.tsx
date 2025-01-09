@@ -84,33 +84,33 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <DashboardHeader />
-      <main className="container mx-auto py-6 px-4">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <main className="container mx-auto py-8 px-4 space-y-8 animate-fade-in">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <StatsCard key={stat.title} {...stat} />
           ))}
         </div>
         
-        <div className="grid gap-6 mt-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Recent Sales</h2>
-            <div className="rounded-lg border bg-card">
+            <h2 className="text-2xl font-bold tracking-tight">Recent Sales</h2>
+            <div className="rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Customer</TableHead>
-                    <TableHead>Product</TableHead>
-                    <TableHead>Amount</TableHead>
-                    <TableHead>Date</TableHead>
+                    <TableHead className="font-semibold">Customer</TableHead>
+                    <TableHead className="font-semibold">Product</TableHead>
+                    <TableHead className="font-semibold">Amount</TableHead>
+                    <TableHead className="font-semibold">Date</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {recentSales.map((sale) => (
-                    <TableRow key={sale.customer}>
-                      <TableCell>{sale.customer}</TableCell>
+                    <TableRow key={sale.customer} className="hover:bg-muted/50">
+                      <TableCell className="font-medium">{sale.customer}</TableCell>
                       <TableCell>{sale.product}</TableCell>
-                      <TableCell>{sale.amount}</TableCell>
-                      <TableCell>{sale.date}</TableCell>
+                      <TableCell className="text-primary font-semibold">{sale.amount}</TableCell>
+                      <TableCell className="text-muted-foreground">{sale.date}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -119,29 +119,31 @@ const Index = () => {
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Top Products</h2>
+            <h2 className="text-2xl font-bold tracking-tight">Top Products</h2>
             <div className="grid gap-4">
               {products.slice(0, 3).map((product) => (
-                <div key={product.title} className="flex items-center gap-4 p-4 rounded-lg border bg-card">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden">
-                    <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
+                <div key={product.title} className="flex items-center gap-4 p-4 rounded-xl border bg-card shadow-sm transition-all hover:shadow-md hover:bg-muted/50">
+                  <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted">
+                    <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform hover:scale-105" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold">{product.title}</h3>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold truncate">{product.title}</h3>
                     <p className="text-sm text-muted-foreground">{product.sales} sales</p>
                   </div>
-                  <p className="text-lg font-bold">${product.price}</p>
+                  <p className="text-lg font-bold text-primary">${product.price}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <h2 className="text-2xl font-bold mt-8 mb-4">All Products</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.title} {...product} />
-          ))}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold tracking-tight">All Products</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.title} {...product} />
+            ))}
+          </div>
         </div>
       </main>
     </div>
