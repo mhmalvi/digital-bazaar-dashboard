@@ -82,9 +82,9 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background">
       <DashboardHeader />
-      <main className="container mx-auto py-8 px-4 space-y-8 animate-fade-in">
+      <main className="flex-1 container mx-auto py-8 px-4 space-y-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <StatsCard key={stat.title} {...stat} />
