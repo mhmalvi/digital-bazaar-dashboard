@@ -1,3 +1,6 @@
+<!-- repo-card -->
+![digital-bazaar-dashboard](docs/assets/social-card.png)
+
 <div align="center">
 
 # Digital Bazaar Dashboard
